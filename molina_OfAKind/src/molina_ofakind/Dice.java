@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package molina_ofakind2;
+package molina_ofakind;
 
 import java.util.Random;
 

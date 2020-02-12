@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package molina_ofakind2;
+package molina_ofakind;
 
 import javax.sound.sampled.LineUnavailableException;
 
@@ -11,7 +11,7 @@ import javax.sound.sampled.LineUnavailableException;
  *
  * @author barrymolina
  */
-public class Molina_OfAKind2 {
+public class Molina_OfAKind {
 
 	/**
 	 * @param args the command line arguments
