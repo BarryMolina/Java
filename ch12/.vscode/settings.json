@@ -1,0 +1,24 @@
+{
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.hlsearch": true,
+    "vim.insertModeKeyBindings": [
+      {
+        "before": ["j", "k"],
+        "after": ["<Esc>"]
+      }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+      {
+        "before": ["<leader>", "d"],
+        "after": ["d", "d"]
+      },
+      {
+        "before": ["<C-n>"],
+        "commands": [":nohl"]
+      }
+    ],
+    "vim.leader": "<space>",
+    "vim.camelCaseMotion.enable": true
+  }

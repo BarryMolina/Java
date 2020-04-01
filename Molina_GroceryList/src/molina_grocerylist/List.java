@@ -39,9 +39,6 @@ public class List {
 			}
 			inputFile.close();
 		}
-		else {
-			System.out.println("File not found");
-		}
 	}
 
 	public void save() throws IOException {

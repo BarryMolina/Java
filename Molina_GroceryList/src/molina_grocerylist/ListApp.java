@@ -85,7 +85,7 @@ public class ListApp {
 		
 		displayItems();
 
-		System.out.print("Enter name of item to add or q to "
+		System.out.print("Enter name of item to add or 'q' to "
 				+ "return to Main Menu: ");
 		item = keyboard.nextLine();
 		
@@ -95,16 +95,6 @@ public class ListApp {
 
 			addItems();
 		}
-//		while (item.toLowerCase().charAt(0) != 'q') {
-//
-//			list.addItem(item);
-//
-//			displayItems();
-//
-//			System.out.print("Enter name of item to add or q to "
-//					+ "return to Main Menu: ");
-//			item = keyboard.nextLine();
-//		}
 	}
 	
 	public void deleteItems() {
@@ -124,13 +114,6 @@ public class ListApp {
 			list.deleteItem(itemIdx - 1);
 			deleteItems();
 		}
-//		while (itemIdx != 0) {
-//			System.out.println("Item deleted");
-//
-//			System.out.print("Enter itemIdx number to delete or 0 to "
-//					+ "return to Main Menu: ");
-//			itemIdx = keyboard.nextInt();
-//		}
 	}
 
 	public void displayItems() {

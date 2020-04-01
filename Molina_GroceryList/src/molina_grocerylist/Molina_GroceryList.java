@@ -17,9 +17,12 @@ public class Molina_GroceryList {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) throws IOException {
+		Admin a = new Admin();
 		ListApp app = new ListApp();
 
+		a.intro();
 		app.run();
+		a.goodbye();
 	}
 	
 }
