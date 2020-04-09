@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Tue Mar 31 12:07:38 CDT 2020:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0171-3190-145c-0000073251d8 
+Mon Apr 06 17:33:01 CDT 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0171-51a0-21d7-000006032f80 
 on database directory /Users/barrymolina/MATC/SP2020/Java/ch16/CoffeeDB with class loader sun.misc.Launcher$AppClassLoader@60e53b93 
 Loaded from file:/Library/Derby10.14/lib/derby.jar
 java.vendor=Oracle Corporation
