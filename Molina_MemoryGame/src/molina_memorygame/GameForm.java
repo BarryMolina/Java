@@ -82,6 +82,8 @@ public class GameForm {
                 int colIndex;
                 int rowIndex;
                 if (clickedNode != cardsGrid) {
+					ImageView thisView = (ImageView) clickedNode;
+					thisView.setImage(new Image(cards.getQueen()));
                     colIndex = GridPane.getColumnIndex(clickedNode);
                     rowIndex = GridPane.getRowIndex(clickedNode);
                     System.out.println("Card clicked: " + colIndex + ", "

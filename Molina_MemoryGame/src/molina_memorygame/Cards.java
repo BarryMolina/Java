@@ -13,6 +13,7 @@ public class Cards {
 
     private final String DIR = "file:cardImages/";
     private String back = "backside.png";
+	private String queen = "queen_of_hearts2.png";
     private int numCards;
 
     public Cards(int numCards) {
@@ -21,5 +22,8 @@ public class Cards {
     public String getBack() {
         return String.format(DIR + back);
     }
+	public String getQueen() {
+		return String.format(DIR + queen);
+	}
     
 }
