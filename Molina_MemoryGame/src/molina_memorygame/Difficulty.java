@@ -18,6 +18,8 @@ public class Difficulty {
     private int screenSizeX;
     private int screenSizeY;
     private int cardSize;
+    private int cellHeight;
+    private int cellWidth;
 
     private final int EASY_COLS = 4;
     private final int EASY_ROWS = 3;
@@ -36,6 +38,9 @@ public class Difficulty {
     private final int EASY_CARD = 100;
     private final int MED_CARD = 70;
     private final int HARD_CARD = 50;
+
+    private final int EASY_HEIGHT = 145;
+    private final int EASY_WIDTH = 100;
 
     public Difficulty(DifficultyLevel level){
         this.level = level;
@@ -67,6 +72,8 @@ public class Difficulty {
                 screenSizeX = EASY_X;
                 screenSizeY = EASY_Y;
                 cardSize = EASY_CARD;
+                cellHeight = EASY_HEIGHT;
+                cellWidth = EASY_WIDTH;
                 break;
         }
     }
@@ -79,11 +86,11 @@ public class Difficulty {
         return level;
     }
 
-    public int getGridRow() {
+    public int getGridRows() {
         return gridRows;
     }
 
-    public int getGridCol() {
+    public int getGridCols() {
         return gridCols;
     }
 
@@ -101,6 +108,14 @@ public class Difficulty {
     
     public int getTotalCards() {
         return gridRows * gridCols;
+    }
+
+    public int getCellHeight() {
+        return cellHeight;
+    }
+
+    public int getCellWidth() {
+        return cellWidth;
     }
     
     
