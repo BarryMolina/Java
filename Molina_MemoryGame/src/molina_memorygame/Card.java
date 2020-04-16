@@ -40,10 +40,6 @@ public class Card {
         catch (ClassCastException e) {
             System.out.println("Can't cast that: " + e.getMessage());
         }
-//        boolean equals = false;
-//        if (c.getURL() == fileName) {
-//            equals = true;
-//        }
         return equals;
     }
     @Override

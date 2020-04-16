@@ -17,9 +17,8 @@ public class Difficulty {
     private int gridCols;
     private int screenSizeX;
     private int screenSizeY;
-    private int cardSize;
-    private int cellHeight;
-    private int cellWidth;
+    private int cardHeight;
+    private int cardWidth;
 
     private final int EASY_COLS = 4;
     private final int EASY_ROWS = 3;
@@ -35,12 +34,12 @@ public class Difficulty {
     private final int HARD_X = 800;
     private final int HARD_Y = 620;
 
-    private final int EASY_CARD = 100;
-    private final int MED_CARD = 70;
-    private final int HARD_CARD = 50;
-
-    private final int EASY_HEIGHT = 145;
-    private final int EASY_WIDTH = 100;
+    private final int EASY_CARD_HEIGHT = 145;
+    private final int EASY_CARD_WIDTH = 100;
+    private final int MED_CARD_HEIGHT = 131;
+    private final int MED_CARD_WIDTH = 90;
+    private final int HARD_CARD_HEIGHT = 116;
+    private final int HARD_CARD_WIDTH = 80;
 
     public Difficulty(DifficultyLevel level){
         this.level = level;
@@ -55,7 +54,8 @@ public class Difficulty {
                 gridRows = HARD_ROWS;
                 screenSizeX = HARD_X;
                 screenSizeY = HARD_Y;
-                cardSize = HARD_CARD;
+                cardHeight = HARD_CARD_HEIGHT;
+                cardWidth = HARD_CARD_WIDTH;
                 break;
             case MEDIUM:
                 lvlName = "Medium";
@@ -63,7 +63,8 @@ public class Difficulty {
                 gridRows = MED_ROWS;
                 screenSizeX = MED_X;
                 screenSizeY = MED_Y;
-                cardSize = MED_CARD;
+                cardHeight = MED_CARD_HEIGHT;
+                cardWidth = MED_CARD_WIDTH;
                 break;
             default:
                 lvlName = "Easy";
@@ -71,9 +72,8 @@ public class Difficulty {
                 gridRows = EASY_ROWS;
                 screenSizeX = EASY_X;
                 screenSizeY = EASY_Y;
-                cardSize = EASY_CARD;
-                cellHeight = EASY_HEIGHT;
-                cellWidth = EASY_WIDTH;
+                cardHeight = EASY_CARD_HEIGHT;
+                cardWidth = EASY_CARD_WIDTH;
                 break;
         }
     }
@@ -102,21 +102,15 @@ public class Difficulty {
         return screenSizeY;
     }
 
-    public int getCardSize() {
-        return cardSize;
+    public int getCardHeight() {
+        return cardHeight;
+    }
+
+    public int getCardWidth() {
+        return cardWidth;
     }
     
     public int getTotalCards() {
         return gridRows * gridCols;
     }
-
-    public int getCellHeight() {
-        return cellHeight;
-    }
-
-    public int getCellWidth() {
-        return cellWidth;
-    }
-    
-    
 }
