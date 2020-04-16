@@ -11,6 +11,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -82,11 +84,18 @@ public class GameForm {
         cardsGrid.setOnMouseClicked(new gridClickHandler());
         cardsGrid.setHgap(10);
         cardsGrid.setVgap(10);
+		cardsGrid.setPadding(new Insets(20));
+		cardsGrid.setGridLinesVisible(true);
         cardsGrid.setAlignment(Pos.CENTER);
+		cardsGrid.maxHeightProperty().bind(cardsGrid.widthProperty());
         
         VBox root = new VBox (40, headerHBox, cardsGrid);
+		//root.setFillHeight(true);
+		root.setVgrow(cardsGrid, Priority.ALWAYS);
+		//cardsGrid.prefHeightProperty().bind(root.heightProperty());
 
-        Scene scene = new Scene(root, d.getScreenSizeX(), d.getScreenSizeY());
+        //Scene scene = new Scene(root, d.getScreenSizeX(), d.getScreenSizeY());
+        Scene scene = new Scene(root);
                                             
         primaryStage.setTitle(name + "'s MemoryGame");
         primaryStage.setScene(scene);
@@ -96,10 +105,21 @@ public class GameForm {
     private void defineGrid() {
         cardsGrid = new GridPane();
         for (int i = 0; i < d.getGridRows(); i++) {
-            cardsGrid.getRowConstraints().add(new RowConstraints(d.getCardHeight()));
+//            cardsGrid.getRowConstraints().add(new RowConstraints(0, d.getCardHeight(),
+//									Double.MAX_VALUE));
+			RowConstraints row = new RowConstraints();
+			row.setPercentHeight((100 / d.getGridRows()) * 100);
+			row.setMinHeight(0);
+			cardsGrid.getRowConstraints().add(row);
+
         }
         for (int i = 0; i < d.getGridCols(); i++) {
-            cardsGrid.getColumnConstraints().add(new ColumnConstraints(d.getCardWidth()));
+//            cardsGrid.getColumnConstraints().add(new ColumnConstraints(d.getCardWidth(),
+//									Control.USE_COMPUTED_SIZE, Control.USE_COMPUTED_SIZE));
+			ColumnConstraints col = new ColumnConstraints();
+			col.setPercentWidth((100 / d.getGridCols()) * 100);
+			col.setMinWidth(0);
+			cardsGrid.getColumnConstraints().add(col);
         }
         for (int y = 0; y < d.getGridCols(); y++) {
             for (int x = 0; x < d.getGridRows(); x++) {
