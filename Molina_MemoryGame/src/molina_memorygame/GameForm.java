@@ -5,6 +5,8 @@
  */
 package molina_memorygame;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -87,9 +89,26 @@ public class GameForm {
 		cardsGrid.setPadding(new Insets(20));
 		cardsGrid.setGridLinesVisible(true);
         cardsGrid.setAlignment(Pos.CENTER);
-		cardsGrid.maxHeightProperty().bind(cardsGrid.widthProperty());
+//		cardsGrid.maxHeightProperty().bind(cardsGrid.widthProperty().multiply(1.06));
+//		cardsGrid.minHeightProperty().bind(cardsGrid.widthProperty().multiply(1.06));
+//		cardsGrid.maxWidthProperty().bind(cardsGrid.heightProperty().multiply(.85));
+        cardsGrid.heightProperty().addListener(new ChangeListener<Number>(){
+            @Override
+            public void changed(ObservableValue<? extends Number > observable,
+                                Number old, Number newNum) {
+                cardsGrid.setMaxWidth((double)newNum * 1.1);
+            }
+        });
+        cardsGrid.widthProperty().addListener(new ChangeListener<Number>(){
+            @Override
+            public void changed(ObservableValue<? extends Number > observable,
+                                Number old, Number newNum) {
+                cardsGrid.setMaxHeight((double) newNum * 1.1);
+            }
+        });
         
         VBox root = new VBox (40, headerHBox, cardsGrid);
+        root.setAlignment(Pos.TOP_CENTER);
 		//root.setFillHeight(true);
 		root.setVgrow(cardsGrid, Priority.ALWAYS);
 		//cardsGrid.prefHeightProperty().bind(root.heightProperty());
@@ -109,7 +128,7 @@ public class GameForm {
 //									Double.MAX_VALUE));
 			RowConstraints row = new RowConstraints();
 			row.setPercentHeight((100 / d.getGridRows()) * 100);
-			row.setMinHeight(0);
+//			row.setMinHeight(0);
 			cardsGrid.getRowConstraints().add(row);
 
         }
@@ -118,12 +137,27 @@ public class GameForm {
 //									Control.USE_COMPUTED_SIZE, Control.USE_COMPUTED_SIZE));
 			ColumnConstraints col = new ColumnConstraints();
 			col.setPercentWidth((100 / d.getGridCols()) * 100);
-			col.setMinWidth(0);
+//			col.setMinWidth(0);
 			cardsGrid.getColumnConstraints().add(col);
         }
         for (int y = 0; y < d.getGridCols(); y++) {
             for (int x = 0; x < d.getGridRows(); x++) {
-                cardsGrid.add(new ImageView(cardBack), y, x);
+                ResizableImageView view = new ResizableImageView(cardBack);
+                HBox.setHgrow(view, Priority.ALWAYS);
+                
+//                ImageView view = new ImageView(cardBack);
+                HBox cardBox = new HBox(view);
+                cardBox.setAlignment(Pos.CENTER);
+                cardBox.setStyle("-fx-border-style: solid inside;"
+                        + "-fx-border-color: blue;"
+                        + "-fx-border-width: 2;");
+//                view.fitHeightProperty().bind(cardBox.heightProperty());
+//                view.fitWidthProperty().bind(cardBox.widthProperty());
+                cardsGrid.add(cardBox, y, x);
+
+                
+
+//                cardsGrid.add(new ImageView(cardBack), y, x);
             }
         }
     }
