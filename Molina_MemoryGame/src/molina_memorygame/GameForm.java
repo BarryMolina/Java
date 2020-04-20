@@ -89,32 +89,42 @@ public class GameForm {
 		cardsGrid.setPadding(new Insets(20));
 		cardsGrid.setGridLinesVisible(true);
         cardsGrid.setAlignment(Pos.CENTER);
-//		cardsGrid.maxHeightProperty().bind(cardsGrid.widthProperty().multiply(1.06));
+//		cardsGrid.maxHeightProperty().bind(cardsGrid.widthProperty().multiply(1.1));
 //		cardsGrid.minHeightProperty().bind(cardsGrid.widthProperty().multiply(1.06));
-//		cardsGrid.maxWidthProperty().bind(cardsGrid.heightProperty().multiply(.85));
-        cardsGrid.heightProperty().addListener(new ChangeListener<Number>(){
-            @Override
-            public void changed(ObservableValue<? extends Number > observable,
-                                Number old, Number newNum) {
-                cardsGrid.setMaxWidth((double)newNum * 1.1);
-            }
-        });
-        cardsGrid.widthProperty().addListener(new ChangeListener<Number>(){
-            @Override
-            public void changed(ObservableValue<? extends Number > observable,
-                                Number old, Number newNum) {
-                cardsGrid.setMaxHeight((double) newNum * 1.1);
-            }
-        });
+//		cardsGrid.maxWidthProperty().bind(cardsGrid.heightProperty().multiply(1.01));
+//        cardsGrid.heightProperty().addListener(new ChangeListener<Number>(){
+//            @Override
+//            public void changed(ObservableValue<? extends Number > observable,
+//                                Number old, Number newNum) {
+//                cardsGrid.setMaxWidth((double)newNum * 1.1);
+//            }
+//        });
+//        cardsGrid.widthProperty().addListener(new ChangeListener<Number>(){
+//            @Override
+//            public void changed(ObservableValue<? extends Number > observable,
+//                                Number old, Number newNum) {
+//                cardsGrid.setMaxHeight((double) newNum * 1.1);
+//            }
+//        });
         
         VBox root = new VBox (40, headerHBox, cardsGrid);
+                root.setStyle("-fx-border-style: solid inside;"
+                        + "-fx-border-color: blue;"
+                        + "-fx-border-width: 2;");
         root.setAlignment(Pos.TOP_CENTER);
 		//root.setFillHeight(true);
 		root.setVgrow(cardsGrid, Priority.ALWAYS);
 		//cardsGrid.prefHeightProperty().bind(root.heightProperty());
 
-        //Scene scene = new Scene(root, d.getScreenSizeX(), d.getScreenSizeY());
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, d.getScreenSizeX(), d.getScreenSizeY());
+//        Scene scene = new Scene(root);
+//        ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) -> {
+//           cardsGrid.setMaxSize(cardsGrid.getHeight() * 1.1, cardsGrid.getWidth() * 1.1);
+//        };
+//        primaryStage.widthProperty().addListener(stageSizeListener);
+//        primaryStage.heightProperty().addListener(stageSizeListener);
+                
+
                                             
         primaryStage.setTitle(name + "'s MemoryGame");
         primaryStage.setScene(scene);
@@ -170,8 +180,10 @@ public class GameForm {
             int colIndex;
             if (clickedNode != cardsGrid) {
                 ImageView thisView = (ImageView) clickedNode;
-                rowIndex = GridPane.getRowIndex(clickedNode);
-                colIndex = GridPane.getColumnIndex(clickedNode);
+                System.out.println(thisView.getImage());
+                rowIndex = GridPane.getRowIndex(clickedNode.getParent());
+                System.out.println(rowIndex);
+                colIndex = GridPane.getColumnIndex(clickedNode.getParent());
                 thisView.setImage(cards.getCard(rowIndex, colIndex).getImage());
                 if (firstCardView == null) {
                     firstCardRow = rowIndex;
@@ -183,8 +195,10 @@ public class GameForm {
                     if (cards.getCard(firstCardRow, firstCardCol).equals(
                                     cards.getCard(rowIndex, colIndex))) {
 
-                        cardsGrid.getChildren().removeAll(firstCardView,
-                                                            thisView);
+                        firstCardView.setImage(null);
+                        thisView.setImage(null);
+//                        cardsGrid.getChildren().removeAll(firstCardView,
+//                                                            thisView);
                     }
                     else {
                         thisView.setImage(cardBack);
