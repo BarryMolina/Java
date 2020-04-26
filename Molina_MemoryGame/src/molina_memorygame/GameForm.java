@@ -5,6 +5,9 @@
  */
 package molina_memorygame;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -25,6 +28,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  *
@@ -37,6 +41,8 @@ public class GameForm {
     private Difficulty d;
     private Cards cards;
     private ImageView firstCardView = null;
+    private ImageView firstCard = null;
+    private ImageView secondCard = null;
     private int firstCardRow;
     private int firstCardCol;
 
@@ -87,7 +93,7 @@ public class GameForm {
         cardsGrid.setHgap(10);
         cardsGrid.setVgap(10);
 		cardsGrid.setPadding(new Insets(20));
-		cardsGrid.setGridLinesVisible(true);
+//		cardsGrid.setGridLinesVisible(true);
         cardsGrid.setAlignment(Pos.CENTER);
 //		cardsGrid.maxHeightProperty().bind(cardsGrid.widthProperty().multiply(1.1));
 //		cardsGrid.minHeightProperty().bind(cardsGrid.widthProperty().multiply(1.06));
@@ -108,9 +114,9 @@ public class GameForm {
 //        });
         
         VBox root = new VBox (40, headerHBox, cardsGrid);
-                root.setStyle("-fx-border-style: solid inside;"
-                        + "-fx-border-color: blue;"
-                        + "-fx-border-width: 2;");
+//                root.setStyle("-fx-border-style: solid inside;"
+//                        + "-fx-border-color: blue;"
+//                        + "-fx-border-width: 2;");
         root.setAlignment(Pos.TOP_CENTER);
 		//root.setFillHeight(true);
 		root.setVgrow(cardsGrid, Priority.ALWAYS);
@@ -158,9 +164,9 @@ public class GameForm {
 //                ImageView view = new ImageView(cardBack);
                 HBox cardBox = new HBox(view);
                 cardBox.setAlignment(Pos.CENTER);
-                cardBox.setStyle("-fx-border-style: solid inside;"
-                        + "-fx-border-color: blue;"
-                        + "-fx-border-width: 2;");
+//                cardBox.setStyle("-fx-border-style: solid inside;"
+//                        + "-fx-border-color: blue;"
+//                        + "-fx-border-width: 2;");
 //                view.fitHeightProperty().bind(cardBox.heightProperty());
 //                view.fitWidthProperty().bind(cardBox.widthProperty());
                 cardsGrid.add(cardBox, y, x);
@@ -178,7 +184,13 @@ public class GameForm {
             Node clickedNode = event.getPickResult().getIntersectedNode();
             int rowIndex;
             int colIndex;
-            if (clickedNode != cardsGrid) {
+            if (secondCard != null) {
+                firstCard.setImage(cardBack);
+                secondCard.setImage(cardBack);
+                firstCard = null;
+                secondCard = null;
+            }
+            if (clickedNode != cardsGrid && !(clickedNode instanceof HBox)) {
                 ImageView thisView = (ImageView) clickedNode;
                 System.out.println(thisView.getImage());
                 rowIndex = GridPane.getRowIndex(clickedNode.getParent());
@@ -189,22 +201,28 @@ public class GameForm {
                     firstCardRow = rowIndex;
                     firstCardCol = colIndex;
                     firstCardView = thisView;
+                    firstCard = thisView;
                     
                 } 
                 else if (thisView != firstCardView) {
+                    secondCard = thisView;
                     if (cards.getCard(firstCardRow, firstCardCol).equals(
                                     cards.getCard(rowIndex, colIndex))) {
+                        // new variables so they still exist by the time pause is over
+                        SequentialTransition fade = getFadeSequence(firstCard);
+                        SequentialTransition fade2 = getFadeSequence(secondCard);
 
-                        firstCardView.setImage(null);
-                        thisView.setImage(null);
-//                        cardsGrid.getChildren().removeAll(firstCardView,
-//                                                            thisView);
-                    }
-                    else {
-                        thisView.setImage(cardBack);
-                        firstCardView.setImage(cardBack);
+                        fade.play();
+                        fade2.play();
 
+                        firstCard = null;
+                        secondCard = null;
+                        //pause.play();
                     }
+//                        else {
+//                            thisView.setImage(cardBack);
+//                            firstCardView.setImage(cardBack);
+//                        }
                     firstCardView = null;
                 }
 
@@ -214,5 +232,19 @@ public class GameForm {
                 System.out.println("Height: " + cardsGrid.getHeight());
             }
         }
+    }
+    private SequentialTransition getFadeSequence(ImageView img) {
+        FadeTransition fadeIn = new FadeTransition(new Duration(500), img);
+        fadeIn.setFromValue(0.0);
+        fadeIn.setToValue(1.0);
+        FadeTransition fadeAway = new FadeTransition(new Duration(500), img);
+        fadeAway.setToValue(0.0);
+        SequentialTransition seq = new SequentialTransition(fadeIn, fadeAway);
+
+        seq.setOnFinished(e -> {
+            img.setImage(null);
+        });
+
+        return seq;
     }
 }

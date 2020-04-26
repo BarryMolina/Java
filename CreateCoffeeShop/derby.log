@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Sat Apr 25 14:06:43 CDT 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0171-b2bc-17d0-000006eeadc8 
+on database directory /home/barry/MATC/SP2020/Java/CreateCoffeeShop/CoffeeShopDatabase with class loader sun.misc.Launcher$AppClassLoader@330bedb4 
+Loaded from file:/home/barry/Downloads/db-derby-10.12.1.1-bin/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_221-b11
+user.dir=/home/barry/MATC/SP2020/Java/CreateCoffeeShop
+os.name=Linux
+os.arch=amd64
+os.version=5.3.0-46-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
