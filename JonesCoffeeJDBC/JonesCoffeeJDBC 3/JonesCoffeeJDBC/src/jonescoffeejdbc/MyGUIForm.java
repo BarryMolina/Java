@@ -273,8 +273,7 @@ public class MyGUIForm extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jButton1ActionPerformed
     
-    public void buildCoffeeObject()
-    {
+    public void buildCoffeeObject() {
         c = new Coffee();
         // get the text from screen;
         c.coffeeDescription = txtDescription.getText();
