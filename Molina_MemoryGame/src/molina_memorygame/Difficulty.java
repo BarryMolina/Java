@@ -21,11 +21,11 @@ public class Difficulty {
     private int cardWidth;
 
     private final int EASY_COLS = 6;
-    private final int EASY_ROWS = 4;
-    private final int MED_COLS = 8;
-    private final int MED_ROWS = 6;
-    private final int HARD_COLS = 12;
-    private final int HARD_ROWS = 8;
+    private final int EASY_ROWS = 3;
+    private final int MED_COLS = 10;
+    private final int MED_ROWS = 4;
+    private final int HARD_COLS = 13;
+    private final int HARD_ROWS = 5;
 
     private final int EASY_X = 800;
     private final int EASY_Y = 620;
