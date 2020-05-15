@@ -12,13 +12,14 @@ package molina_relativity;
 public class Astronaut {
 
 
-    private int NumberOnMoon;
+    private Integer NumberOnMoon;
     private String astroFName;
     private String astroLName;
     private int apolloMissionNumber;
     private String yearOfMission;
 
     public Astronaut() {
+        this.NumberOnMoon = null;
         this.astroLName = null;
         this.astroLName = null;
         this.apolloMissionNumber = 0;
@@ -33,7 +34,7 @@ public class Astronaut {
         this.yearOfMission = yearOfMission;
     }
 
-    public int getNumberOnMoon() {
+    public Integer getNumberOnMoon() {
         return NumberOnMoon;
     }
 

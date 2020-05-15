@@ -9,6 +9,7 @@ package molina_relativity;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 /**
  *
@@ -22,6 +23,7 @@ public class AstronautGUI extends javax.swing.JFrame {
     /** Creates new form AstronautGUI */
     public AstronautGUI() {
         initComponents();
+        lblMessage.setText("");
     }
     public void setCRUD(CRUD crud)
     {
@@ -31,6 +33,9 @@ public class AstronautGUI extends javax.swing.JFrame {
     public JTable getTblAstronaut()
     {
         return tblAstronaut;
+    }
+    public JLabel getLblMessage() {
+        return lblMessage;
     }
 
     /** This method is called from within the constructor to
@@ -42,6 +47,7 @@ public class AstronautGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         rdbSelect = new javax.swing.JRadioButton();
         rdbInsert = new javax.swing.JRadioButton();
@@ -57,23 +63,31 @@ public class AstronautGUI extends javax.swing.JFrame {
         txtApolloMissionNumber = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtYearOfMission = new javax.swing.JTextField();
-        btnSubmit = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtNumberOnMoon = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblAstronaut = new javax.swing.JTable();
+        lblMessage = new javax.swing.JLabel();
+        btnSubmit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        buttonGroup1.add(rdbSelect);
         rdbSelect.setSelected(true);
         rdbSelect.setText("select");
 
+        buttonGroup1.add(rdbInsert);
         rdbInsert.setText("insert");
 
+        buttonGroup1.add(rdbUpdate);
         rdbUpdate.setText("update");
 
+        buttonGroup1.add(rdbDelete);
         rdbDelete.setText("delete");
 
+        buttonGroup1.add(rdbReset);
         rdbReset.setText("initialize table");
         rdbReset.setActionCommand("");
 
@@ -96,13 +110,13 @@ public class AstronautGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(rdbSelect)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rdbInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rdbUpdate)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rdbDelete)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rdbReset)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -117,35 +131,53 @@ public class AstronautGUI extends javax.swing.JFrame {
 
         jLabel4.setText("Year of Mission");
 
+        jLabel5.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
+        jLabel5.setText("Number On Moon:");
+        jLabel5.setToolTipText("");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtApolloMissionNumber, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                            .addComponent(txtAstroFName, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtAstroLName, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                            .addComponent(txtYearOfMission))))
-                .addContainerGap(15, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(txtApolloMissionNumber)
+                                        .addGap(8, 8, 8)))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(txtYearOfMission)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txtAstroFName, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtAstroLName, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(42, 42, 42)
+                                .addComponent(jLabel2))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNumberOnMoon, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(8, 8, 8)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtNumberOnMoon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
@@ -161,15 +193,8 @@ public class AstronautGUI extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtApolloMissionNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtYearOfMission, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        btnSubmit.setText("Submit");
-        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubmitActionPerformed(evt);
-            }
-        });
 
         tblAstronaut.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblAstronaut.setModel(new javax.swing.table.DefaultTableModel(
@@ -185,45 +210,57 @@ public class AstronautGUI extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tblAstronaut);
 
+        lblMessage.setForeground(new java.awt.Color(255, 0, 0));
+        lblMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMessage.setText("jLabel6");
+
+        btnSubmit.setText("Submit");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 15, Short.MAX_VALUE))
+                    .addComponent(lblMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSubmit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lblMessage)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        // TODO add your handling code here:
-
-        if(rdbSelect.isSelected())
-        {
+        lblMessage.setText("");
+        if(rdbSelect.isSelected()) {
             if(buildAstronautObject()) 
             {     //get information from the screen
                 crud.showRecord(a);    //show a specific record on the table
@@ -232,69 +269,70 @@ public class AstronautGUI extends javax.swing.JFrame {
             {
                 crud.showTable();    //show all records on the table
             }
-//            if (a.coffeeProductNumber.isEmpty())
-//            {
-//                //get all the product numbers.
-//                System.out.println("product number is empty calling show table");
-//            }
-//            else
-//            {
-//                //get a specific product number
-//                System.out.println("get a specific product number");
-//                crud.showRecord(a);    //show a specific record on the table
-//            }
-//        }
-//        else if(rdbInsert.isSelected())
-//        {
-//            buildCoffeeObject();      //get information from the screen and build a coffee object with it.
-//            crud.insertDb(a);         //add a new record
-//            crud.showTable();         //show all the records including newly added record.
-//        }
-//        else if(rdbUpdate.isSelected())
-//        {
-//            buildCoffeeObject();
-//            crud.updateDb(a);          //update price or description
-//            crud.showTable();          //show all records including newly updated record
-//        }
-//        else if (rdbDelete.isSelected())
-//        {
-//            buildCoffeeObject();
-//            crud.deleteDb(a);           //delete a specific record
-//            crud.showTable();
-//
-//        }
-//        else if (rdbReset.isSelected())
-//        {
-//            BuildTables bt = new BuildTables();                    //rebuild the table
-//            crud.showTable();
         }
+        else if(rdbInsert.isSelected()) {
+            if (buildAstronautObject()) {     
+                crud.insertDb(a);         //add a new record
+                crud.showTable();         //show all the records including newly added record.
+            }
+        }
+        else if(rdbUpdate.isSelected()) {
+            if (buildAstronautObject()) {
+                crud.updateDb(a);       
+                crud.showTable();         //show all the records including newly updated record.
+            }
+        }
+        else if (rdbDelete.isSelected()) {
 
+            if (buildAstronautObject()) {     
+                crud.deleteDb(a);           //delete a specific record or records
+                crud.showTable();
+            }
+
+        }
+        else if (rdbReset.isSelected()) {
+            BuildTables bt = new BuildTables();                    //rebuild the table
+            crud.showTable();
+        }
     }//GEN-LAST:event_btnSubmitActionPerformed
     public boolean buildAstronautObject() {
         a = new Astronaut();
         boolean containsData = false;
         // get the text from screen;
-        if (!(txtAstroFName.getText().equals("")))           //if not empty convert it.
+        if (!(txtNumberOnMoon.getText().equals("")))         
+        {
+            a.setNumberOnMoon(Integer.parseInt(txtNumberOnMoon.getText()));
+            containsData = true;
+        }
+        if (!(txtAstroFName.getText().equals("")))          
         {
             a.setAstroFName(txtAstroFName.getText());
             containsData = true;
         }
-        if (!(txtAstroLName.getText().equals("")))           //if not empty convert it.
+        if (!(txtAstroLName.getText().equals("")))         
         {
             a.setAstroLName(txtAstroLName.getText());
             containsData = true;
         }
-        if (!(txtYearOfMission.getText().equals("")))           //if not empty convert it.
+        if (!(txtYearOfMission.getText().equals("")))           
         {
             a.setYearOfMission(txtYearOfMission.getText());
             containsData = true;
         }
-        if (!(txtApolloMissionNumber.getText().equals("")))           //if not empty convert it.
+        if (!(txtApolloMissionNumber.getText().equals("")))        
         {
             a.setApolloMissionNumber(Integer.parseInt(txtApolloMissionNumber.getText()));
             containsData = true;
         }
         return containsData;
+    }
+
+    public void resetFields() {
+        txtNumberOnMoon.setText("");
+        txtAstroFName.setText("");
+        txtAstroLName.setText("");
+        txtApolloMissionNumber.setText("");
+        txtYearOfMission.setText("");
     }
 
     /**
@@ -334,13 +372,16 @@ public class AstronautGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblMessage;
     private javax.swing.JRadioButton rdbDelete;
     private javax.swing.JRadioButton rdbInsert;
     private javax.swing.JRadioButton rdbReset;
@@ -350,6 +391,7 @@ public class AstronautGUI extends javax.swing.JFrame {
     private javax.swing.JTextField txtApolloMissionNumber;
     private javax.swing.JTextField txtAstroFName;
     private javax.swing.JTextField txtAstroLName;
+    private javax.swing.JTextField txtNumberOnMoon;
     private javax.swing.JTextField txtYearOfMission;
     // End of variables declaration//GEN-END:variables
 

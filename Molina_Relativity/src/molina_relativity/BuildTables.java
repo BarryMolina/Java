@@ -70,8 +70,7 @@ public class BuildTables {
             Statement stmt = conn.createStatement();
             
             stmt.execute("CREATE Table Astronaut (" +
-                    "NumberOnMoon INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY"
-                    + "(START WITH 1, INCREMENT BY 1)," +
+                    "NumberOnMoon INTEGER NOT NULL PRIMARY KEY," +
                     "AstroFName VARCHAR(25), " +
                     "AstroLName VARCHAR(25), " +
                     "ApolloMissionNumber INTEGER , " + 
@@ -79,22 +78,21 @@ public class BuildTables {
                     ")");
             
             System.out.println("created coffee table");
-            //Insert row #1
             stmt.execute("INSERT INTO Astronaut " +
-                "(AstroFName, AstroLName, ApolloMissionNumber, YearOfMission)" +
+//                "(NumberOnMoon, AstroFName, AstroLName, ApolloMissionNumber, YearOfMission)" +
                 "Values " +
-                "('Neil', 'Armstrong', 11, '1969'), " +
-                "('Buzz', 'Aldrin', 11, '1969'), " +
-                "('Charles', 'Conrad', 12, '1969'), " +
-                "('Alan', 'Bean', 12, '1969'), " +
-                "('Alan', 'Shepard', 14, '1971'), " +
-                "('Adgar', 'Mitchell', 14, '1971'), " +
-                "('David', 'Scott', 15, '1971'), " +
-                "('James', 'Irwin', 15, '1971'), " +
-                "('John', 'Young', 16, '1972'), " +
-                "('Charles', 'Duke', 16, '1972'), " +
-                "('Gene', 'Ceman', 17, '1972'), " +
-                "('Harrison', 'Schmitt', 17, '1972')");
+                "(1, 'Neil', 'Armstrong', 11, '1969'), " +
+                "(2, 'Buzz', 'Aldrin', 11, '1969'), " +
+                "(3, 'Charles', 'Conrad', 12, '1969'), " +
+                "(4, 'Alan', 'Bean', 12, '1969'), " +
+                "(5, 'Alan', 'Shepard', 14, '1971'), " +
+                "(6, 'Adgar', 'Mitchell', 14, '1971'), " +
+                "(7, 'David', 'Scott', 15, '1971'), " +
+                "(8, 'James', 'Irwin', 15, '1971'), " +
+                "(9, 'John', 'Young', 16, '1972'), " +
+                "(10, 'Charles', 'Duke', 16, '1972'), " +
+                "(11, 'Gene', 'Ceman', 17, '1972'), " +
+                "(12, 'Harrison', 'Schmitt', 17, '1972')");
 
             System.out.println("inserted Astronaut data");  
         }catch(SQLException ex)

@@ -1,0 +1,40 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 12, 2020, 11:58:42 AM
+    Author     : barry
+*/
+
+.easy {
+    -fx-background-color: aliceblue;
+    /*-fx-background-insets: 0, 1;*/
+}
+.medium {
+    -fx-background-color: lightblue;
+    /*-fx-background-insets: 0, 1 0 1 0;*/
+}
+.hard {
+    -fx-background-color: lightsteelblue;
+    /*-fx-background-insets: 0, 1;*/
+}
+.heading-1 {
+    -fx-font-size: 1.5em;
+}
+.heading-2 {
+    -fx-font-weight: bold;
+}
+HBox {
+    /*-fx-background-color: yellow;*/
+    -fx-alignment: center;
+    /*-fx-background-color: white;*/
+    /*-fx-font-weight: bold;*/
+}
+GridPane {
+    -fx-background-color: black;
+    -fx-vgap: 1;
+    -fx-hgap: 1;
+    -fx-padding: 1; 
+}

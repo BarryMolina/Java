@@ -8,6 +8,9 @@ package molina_memorygame;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -37,6 +40,7 @@ import javafx.util.Duration;
 public class GameForm {
 
     private Stage primaryStage;
+    private ScoresForm scoresForm;
     private String name;
     private Difficulty d;
     private Cards cards;
@@ -53,7 +57,9 @@ public class GameForm {
     private GridPane cardsGrid;
     private Image cardBack;
 
-    
+    private int numMatches;
+    private int numFound = 0;
+    private int numAttempts = 0;
 
     public GameForm(Stage primaryStage, String name, DifficultyLevel level) {
         this.primaryStage = primaryStage;
@@ -62,6 +68,7 @@ public class GameForm {
         d = new Difficulty(level);
         cards = new Cards(d.getTotalCards(), d.getGridRows(), d.getGridCols()); 
 //        fillImages();
+        numMatches = d.getTotalCards() / 2;
         System.out.println(cards);
     }
     public void buildForm() {
@@ -71,9 +78,13 @@ public class GameForm {
         Label lblFound = new Label("Matches Found: ");
         Label lblAttempts = new Label("Tries: ");
 
-        lblNumMatches = new Label("0");
-        lblNumFound = new Label("0");
-        lblNumAttempts = new Label("0");
+        lblNumMatches = new Label(Integer.toString(numMatches));
+        lblNumFound = new Label(Integer.toString(numFound));
+        lblNumAttempts = new Label(Integer.toString(numAttempts));
+
+//        lblNumMatches.textProperty().bind(new SimpleIntegerProperty(numMatches).asString());
+//        lblNumFound.textProperty().bind(new SimpleIntegerProperty(numFound).asString());
+//        lblNumAttempts.textProperty().bind(new SimpleIntegerProperty(numAttempts).asString());
 
         HBox matchesHBox = new HBox(5, lblMatches, lblNumMatches);
         HBox foundHBox = new HBox(5, lblFound, lblNumFound);
@@ -217,6 +228,10 @@ public class GameForm {
 
                         firstCard = null;
                         secondCard = null;
+                        lblNumMatches.setText(Integer.toString(--numMatches));
+                        lblNumFound.setText(Integer.toString(++numFound));
+                        
+                        //System.out.println("matches: " + numMatches + " " + numFound);
                         //pause.play();
                     }
 //                        else {
@@ -224,6 +239,11 @@ public class GameForm {
 //                            firstCardView.setImage(cardBack);
 //                        }
                     firstCardView = null;
+                    lblNumAttempts.setText(Integer.toString(++numAttempts));
+                    if (numMatches <= 0) {
+                        Score score = new Score(name, numAttempts, d.getLevel());
+                        scoresForm = new ScoresForm(primaryStage, score);
+                    }
                 }
 
                 System.out.println("Card clicked: " + colIndex + ", "
