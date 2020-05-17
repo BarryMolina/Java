@@ -16,8 +16,8 @@ public class ScoresTable {
         try {
             Connection conn = DriverManager.getConnection(DB_URL);
             dropTable(conn);
-            buildTable(conn);
-            insertTable(conn);
+//            buildTable(conn);
+//            insertTable(conn);
             conn.close();
             System.out.println("Success");
         }
@@ -29,21 +29,17 @@ public class ScoresTable {
         Statement stmt = conn.createStatement();
         String sql = "CREATE TABLE Scores (" +
                      "ScoreID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," +
-                     "Name VARCHAR(25), " +
+                     "PlayerID INTEGER NOT NULL REFERENCES Players (PlayerID)," +
                      "Difficulty VARCHAR(6) NOT NULL, " +
                      "Score INTEGER NOT NULL)";
         stmt.execute(sql);
     }
     private void insertTable(Connection conn) throws SQLException {
         Statement stmt = conn.createStatement();
-        String sql = "INSERT INTO Scores (Name, Difficulty, Score) VALUES " +
-//                     "('Barry', 'EASY', 3), " +
-//                     "('Barry', 'EASY', 30), " +
-                     "('Lizzie', 'MEDIUM', 54), " +
-//                     "('Lizzie', 'MEDIUM', 67), " +
-                     "('Barry', 'HARD', 104), " +
-//                     "('Barry', 'HARD', 89), " +
-                     "('Baz', 'EASY', 27)";
+        String sql = "INSERT INTO Scores (PlayerID, Difficulty, Score) VALUES " +
+                     "(2, 'MEDIUM', 54), " +
+                     "(1, 'HARD', 104), " +
+                     "(3, 'EASY', 27)";
         stmt.execute(sql);
     }
     private void dropTable(Connection conn) throws SQLException {

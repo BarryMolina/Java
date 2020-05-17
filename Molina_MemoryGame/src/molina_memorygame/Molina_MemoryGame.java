@@ -21,9 +21,10 @@ public class Molina_MemoryGame extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-//        ScoresTable table = new ScoresTable();
-        IntroForm intro = new IntroForm(primaryStage);
-        intro.buildForm();
+        PlayersTable players = new PlayersTable();
+//        ScoresTable scores = new ScoresTable();
+//        IntroForm intro = new IntroForm(primaryStage);
+//        intro.buildForm();
 //        Score score = new Score("Barry", 55, DifficultyLevel.EASY);
 //        ScoresForm scores = new ScoresForm(primaryStage, score);
 //        Scores scoresData = new Scores();

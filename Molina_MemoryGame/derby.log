@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Fri May 15 20:27:27 CDT 2020:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0172-1b17-d860-000007115558 
-on database directory /Users/barrymolina/MATC/SP2020/Java/Molina_MemoryGame/MemoryGameDB with class loader sun.misc.Launcher$AppClassLoader@42a57993 
-Loaded from file:/Users/barrymolina/MATC/SP2020/Java/Molina_MemoryGame/dist/run280728790/lib/derby.jar
+Sun May 17 17:34:33 CDT 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0172-24c6-467f-000006643d80 
+on database directory /home/barry/MATC/SP2020/Java/Molina_MemoryGame/MemoryGameDB with class loader sun.misc.Launcher$AppClassLoader@33909752 
+Loaded from file:/home/barry/MATC/SP2020/Java/Molina_MemoryGame/dist/run475821283/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_221-b11
-user.dir=/Users/barrymolina/MATC/SP2020/Java/Molina_MemoryGame
-os.name=Mac OS X
-os.arch=x86_64
-os.version=10.15.3
+user.dir=/home/barry/MATC/SP2020/Java/Molina_MemoryGame
+os.name=Linux
+os.arch=amd64
+os.version=5.3.0-51-generic
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
