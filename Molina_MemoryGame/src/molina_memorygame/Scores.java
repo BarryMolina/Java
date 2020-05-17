@@ -15,7 +15,8 @@ import java.util.Collections;
  */
 public class Scores {
 
-    final String DB_URL = "jdbc:derby://localhost:1527/MemoryGameDB;user=sa;password=sa;create=true";
+//    final String DB_URL = "jdbc:derby://localhost:1527/MemoryGameDB;user=sa;password=sa;create=true";
+    final String DB_URL = "jdbc:derby:MemoryGameDB;create=true";
 
     private ArrayList<Score> easyScores = new ArrayList<Score>();
     private ArrayList<Score> mediumScores = new ArrayList<Score>();

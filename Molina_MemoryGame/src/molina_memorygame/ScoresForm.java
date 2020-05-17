@@ -73,7 +73,18 @@ public class ScoresForm {
         Label title = new Label("High Scores");
 
         Button btnQuit = new Button("Quit");
+		btnQuit.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				System.exit(0);
+			}
+		});
         Button btnPlayAgain = new Button("Play Again!");
+		btnPlayAgain.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				IntroForm intro = new IntroForm(primaryStage);
+				intro.buildForm();
+			}
+		});
         HBox btnHBox = new HBox(20, btnQuit, btnPlayAgain);
 
         buildGrid();

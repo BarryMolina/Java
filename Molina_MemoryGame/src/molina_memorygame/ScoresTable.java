@@ -9,7 +9,8 @@ import java.sql.*;
 
 public class ScoresTable {
 
-    final String DB_URL = "jdbc:derby://localhost:1527/MemoryGameDB;user=sa;password=sa;create=true";
+//    final String DB_URL = "jdbc:derby://localhost:1527/MemoryGameDB;user=sa;password=sa;create=true";
+    final String DB_URL = "jdbc:derby:MemoryGameDB;create=true";
 
     public ScoresTable() {
         try {
