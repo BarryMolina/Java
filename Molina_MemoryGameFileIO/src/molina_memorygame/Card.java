@@ -12,15 +12,22 @@ import javafx.scene.image.Image;
  * @author barry
  */
 public class Card {
+    private Image image;
     private String fileName;
 
-    public Card(String fileName) {
+    public Card(String dir, String fileName) {
         this.fileName = fileName;
+        image = new Image(dir + fileName);
     }
 
+    public Image getImage() {
+        return image;
+    }
+    
     public String getFName() {
         return fileName;
     }
+     
 
     @Override
     public boolean equals(Object o) {
@@ -39,4 +46,6 @@ public class Card {
     public String toString() {
         return fileName;
     }
+
+    
 }
