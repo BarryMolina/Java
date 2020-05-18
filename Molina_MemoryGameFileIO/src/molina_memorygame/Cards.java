@@ -70,23 +70,23 @@ public class Cards {
         "queen_of_spades2.png"
     };
     private String back = "backside.png";
-    private Card[][] cardsInPlay;
-    private ArrayList<Card> pairs = new ArrayList<>();
+    private CardImage[][] cardsInPlay;
+    private ArrayList<CardImage> pairs = new ArrayList<>();
     public Random rand = new Random();
 
     private int numCards;
 
     public Cards(int numCards, int numRows, int numCols) {
         this.numCards = numCards;
-        cardsInPlay = new Card[numRows][numCols];
+        cardsInPlay = new CardImage[numRows][numCols];
         fillPairs();
         fillCardsInPlay();
     }
 
     private void fillPairs() {
-        Card newCard;
+        CardImage newCard;
         while (pairs.size() < numCards) {
-            newCard = new Card(DIR, deck[rand.nextInt(deck.length)]);
+            newCard = new CardImage(DIR, deck[rand.nextInt(deck.length)]);
             if (!pairs.contains(newCard)) {
                 pairs.add(newCard);
                 pairs.add(newCard);
@@ -129,6 +129,9 @@ public class Cards {
 //        return str;
 //    }
     public Card getCard(int row, int col) {
+        return cardsInPlay[row][col];
+    }
+    public CardImage getCardImage(int row, int col) {
         return cardsInPlay[row][col];
     }
     @Override

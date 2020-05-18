@@ -207,7 +207,7 @@ public class GameForm {
                 rowIndex = GridPane.getRowIndex(clickedNode.getParent());
                 System.out.println(rowIndex);
                 colIndex = GridPane.getColumnIndex(clickedNode.getParent());
-                thisView.setImage(cards.getCard(rowIndex, colIndex).getImage());
+                thisView.setImage(cards.getCardImage(rowIndex, colIndex).getImage());
                 if (firstCardView == null) {
                     firstCardRow = rowIndex;
                     firstCardCol = colIndex;
