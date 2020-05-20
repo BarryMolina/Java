@@ -8,6 +8,10 @@ and open the template in the editor.
     Author     : barry
 */
 
+.title {
+    -fx-font-size: 2em;
+    -fx-font-weigth: bold;
+}
 .easy {
     -fx-background-color: aliceblue;
     /*-fx-background-insets: 0, 1;*/

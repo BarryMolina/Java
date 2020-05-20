@@ -33,10 +33,10 @@ public class Difficulty {
     // These variables store initial screen sizes for each difficulty level.
     private final int EASY_X = 800;
     private final int EASY_Y = 620;
-    private final int MED_X = 800;
-    private final int MED_Y = 620;
-    private final int HARD_X = 800;
-    private final int HARD_Y = 620;
+    private final int MED_X = 900;
+    private final int MED_Y = 720;
+    private final int HARD_X = 1000;
+    private final int HARD_Y = 820;
 
     /**
      * Accepts a DifficultyLevel enum and sets fields based on that value.

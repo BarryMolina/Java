@@ -86,18 +86,21 @@ public class ScoresForm {
      */
     private void buildForm() {
         Label title = new Label("High Scores");
+        title.getStyleClass().add("title");
 
-        Button btnQuit = new Button("Quit");
-		btnQuit.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				System.exit(0);
-			}
-		});
         Button btnPlayAgain = new Button("Play Again!");
+        btnPlayAgain.setDefaultButton(true);
 		btnPlayAgain.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
 				IntroForm intro = new IntroForm(primaryStage);
 				intro.buildForm();
+			}
+		});
+        Button btnQuit = new Button("Quit");
+        btnQuit.setCancelButton(true);
+		btnQuit.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				System.exit(0);
 			}
 		});
         HBox btnHBox = new HBox(20, btnQuit, btnPlayAgain);
@@ -107,7 +110,7 @@ public class ScoresForm {
         scoresGrid.setAlignment(Pos.CENTER);
 //        scoresGrid.setGridLinesVisible(true);
         
-        VBox vBox = new VBox(100, title, group, btnHBox);
+        VBox vBox = new VBox(60, title, group, btnHBox);
         vBox.setAlignment(Pos.CENTER);
 
         scene = new Scene(vBox, 600, 400);

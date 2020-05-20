@@ -36,6 +36,7 @@ public class IntroForm {
      */
     public void buildForm() {
         Label lblTitle = new Label("Welcome to MemoryGame!");
+        lblTitle.getStyleClass().add("title");
         Label lblName = new Label("Enter Your Name:");
         Label lblDifficulty = new Label("Select Your Difficulty:");
 
@@ -60,12 +61,14 @@ public class IntroForm {
         hBox.setAlignment(Pos.CENTER);
 
         Button btn = new Button("Let's Play!");
+        btn.setDefaultButton(true);
         btn.setOnAction(new PlayButtonHandler());
         
-        VBox root = new VBox(20, lblTitle, hBox, btn);
+        VBox root = new VBox(40, lblTitle, hBox, btn);
         root.setAlignment(Pos.CENTER);
         
         Scene scene = new Scene(root, 500, 350);
+        scene.getStylesheets().add("molina_memorygame/styles.css");
         
         primaryStage.setTitle("MemoryGame");
         primaryStage.setScene(scene);

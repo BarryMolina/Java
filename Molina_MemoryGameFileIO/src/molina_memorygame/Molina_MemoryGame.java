@@ -21,11 +21,11 @@ public class Molina_MemoryGame extends Application {
     public void start(Stage primaryStage) {
 //        PlayersTable players = new PlayersTable();
 //        ScoresTable scores = new ScoresTable();
-        IntroForm intro = new IntroForm(primaryStage); // Create a new IntroForm
-        intro.buildForm(); // Build the IntroForm and display it
+//        IntroForm intro = new IntroForm(primaryStage); // Create a new IntroForm
+//        intro.buildForm(); // Build the IntroForm and display it
 //        Scores scoresData = new Scores();
 //        scoresData.resetScores();
-//        ScoresForm scores = new ScoresForm(primaryStage);
+        ScoresForm scores = new ScoresForm(primaryStage);
 //        Score score = new Score("Barry", 55, DifficultyLevel.EASY);
 //        ScoresForm scores = new ScoresForm(primaryStage, score);
 //        scoresData.addScore(score);

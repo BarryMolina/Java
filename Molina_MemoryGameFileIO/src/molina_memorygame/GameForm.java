@@ -6,20 +6,12 @@
 package molina_memorygame;
 
 import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,6 +24,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javax.swing.JOptionPane;
 
 /**
  * This class builds the form for the game.
@@ -48,10 +41,12 @@ public class GameForm {
     private Difficulty d;
     // The Cards object used to get each card in play
     private Cards cards;
-    // 
+    // Whether the next card is the first card of the turn
+    private boolean firstCard = true;
+    // The first card clicked
     private ImageView firstCardView = null;
-    private ImageView firstCard = null;
-    private ImageView secondCard = null;
+    // The second card clicked
+    private ImageView secondCardView = null;
     // The row of the first card of the turn
     private int firstCardRow;
     // The column of the first card of the turn
@@ -81,7 +76,6 @@ public class GameForm {
         d = new Difficulty(level);
         cards = new Cards(d.getTotalCards(), d.getGridRows(), d.getGridCols()); 
         numMatches = d.getTotalCards() / 2;
-        //System.out.println(cards);
     }
     /**
      * Build GUI objects and attach them to the scene.
@@ -115,12 +109,8 @@ public class GameForm {
         cardsGrid.setHgap(10);
         cardsGrid.setVgap(10);
 		cardsGrid.setPadding(new Insets(20));
-//		cardsGrid.setGridLinesVisible(true);
         cardsGrid.setAlignment(Pos.CENTER);
         VBox root = new VBox (40, headerHBox, cardsGrid);
-//                root.setStyle("-fx-border-style: solid inside;"
-//                        + "-fx-border-color: blue;"
-//                        + "-fx-border-width: 2;");
         root.setAlignment(Pos.TOP_CENTER);
 		root.setVgrow(cardsGrid, Priority.ALWAYS);
 
@@ -136,16 +126,20 @@ public class GameForm {
      */
     private void defineGrid() {
         cardsGrid = new GridPane();
+        // Define grid rows to be a percentage height of the parent.
         for (int i = 0; i < d.getGridRows(); i++) {
 			RowConstraints row = new RowConstraints();
 			row.setPercentHeight((100 / d.getGridRows()) * 100);
 			cardsGrid.getRowConstraints().add(row);
         }
+        // Define grid columns to be a percentage width of the parent.
         for (int i = 0; i < d.getGridCols(); i++) {
 			ColumnConstraints col = new ColumnConstraints();
 			col.setPercentWidth((100 / d.getGridCols()) * 100);
 			cardsGrid.getColumnConstraints().add(col);
         }
+        // Add a ResizableImageView to each grid cell within an HBox
+        // so that the card image resizes with the grid.
         for (int y = 0; y < d.getGridCols(); y++) {
             for (int x = 0; x < d.getGridRows(); x++) {
                 ResizableImageView view = new ResizableImageView(cardBack);
@@ -153,9 +147,6 @@ public class GameForm {
                 
                 HBox cardBox = new HBox(view);
                 cardBox.setAlignment(Pos.CENTER);
-//                cardBox.setStyle("-fx-border-style: solid inside;"
-//                        + "-fx-border-color: blue;"
-//                        + "-fx-border-width: 2;");
                 cardsGrid.add(cardBox, y, x);
             }
         }
@@ -178,15 +169,15 @@ public class GameForm {
             // The column index of the node.
             int colIndex;
             // If this is the first card and two cards were flipped before this one.
-            if (secondCard != null) {
+            if (secondCardView != null) {
                 // flip over the first two cards
-                firstCard.setImage(cardBack);
-                secondCard.setImage(cardBack);
+                firstCardView.setImage(cardBack);
+                secondCardView.setImage(cardBack);
                 // reset values
-                firstCard = null;
-                secondCard = null;
+                firstCardView = null;
+                secondCardView = null;
             }
-            // If the node clicked is and ImageView
+            // If the node clicked is an ImageView
             if (clickedNode != cardsGrid && !(clickedNode instanceof HBox)) {
                 // An ImageView object to hold the current node
                 ImageView thisView = (ImageView) clickedNode;
@@ -194,45 +185,47 @@ public class GameForm {
                 colIndex = GridPane.getColumnIndex(clickedNode.getParent());
                 thisView.setImage(cards.getCard(rowIndex, colIndex).getImage());
                 // If this is the first card of the turn
-                if (firstCardView == null) {
+                if (firstCard) {
+                    System.out.println("This is the first card");
                     firstCardRow = rowIndex;
                     firstCardCol = colIndex;
                     firstCardView = thisView;
-                    firstCard = thisView;
+                    firstCard = false;
                 } 
                 // If the same card is not clicked twice
                 else if (thisView != firstCardView) {
-                    secondCard = thisView;
+                    System.out.println("This is the second card");
+                    secondCardView = thisView;
                     // Check if cards are the same
                     if (cards.getCard(firstCardRow, firstCardCol).equals(
                                     cards.getCard(rowIndex, colIndex))) {
                         // Get the fade sequence for each card
-                        SequentialTransition fade = getFadeSequence(firstCard);
-                        SequentialTransition fade2 = getFadeSequence(secondCard);
+                        SequentialTransition fade = getFadeSequence(firstCardView);
+                        SequentialTransition fade2 = getFadeSequence(secondCardView);
 
                         // Play the fade sequences
                         fade.play();
                         fade2.play();
 
                         // Reset the first and second card views
-                        firstCard = null;
-                        secondCard = null;
+                        firstCardView = null;
+                        secondCardView = null;
                         // update the counters and their labels
                         lblNumMatches.setText(Integer.toString(--numMatches));
                         lblNumFound.setText(Integer.toString(++numFound));
                     }
-                    firstCardView = null;
                     lblNumAttempts.setText(Integer.toString(++numAttempts));
                     if (numMatches <= 0) {
                         Score score = new Score(name, numAttempts, d.getLevel());
                         scoresForm = new ScoresForm(primaryStage, score);
                     }
+//                    // The next card will be the first of the turn
+                    firstCard = true;
                 }
 
-                System.out.println("Card clicked: " + colIndex + ", "
-                        + rowIndex);
-                System.out.println("Width: " + cardsGrid.getWidth());
-                System.out.println("Height: " + cardsGrid.getHeight());
+            System.out.println("At end of click logic: firstCardView: " + firstCardView);
+            System.out.println("At end of click logic: secondCardView: " + secondCardView);
+            System.out.println();
             }
         }
     }
