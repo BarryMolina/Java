@@ -34,20 +34,27 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
- *
- * @author barry
+ * This class builds the form for the game.
  */
 public class GameForm {
 
+    // The primary stage
     private Stage primaryStage;
+    // The ScoreForm to be displayed after the game is over.
     private ScoresForm scoresForm;
+    // The player's name
     private String name;
+    // A difficulty object to get information relating to the selected difficulty
     private Difficulty d;
+    // The Cards object used to get each card in play
     private Cards cards;
+    // 
     private ImageView firstCardView = null;
     private ImageView firstCard = null;
     private ImageView secondCard = null;
+    // The row of the first card of the turn
     private int firstCardRow;
+    // The column of the first card of the turn
     private int firstCardCol;
 
 
@@ -61,16 +68,24 @@ public class GameForm {
     private int numFound = 0;
     private int numAttempts = 0;
 
+    /**
+     * Create Difficulty and Cards objects.
+     * @param primaryStage The Primary Stage.
+     * @param name Player name.
+     * @param level Difficulty selected.
+     */
     public GameForm(Stage primaryStage, String name, DifficultyLevel level) {
         this.primaryStage = primaryStage;
         this.name = name;
 
         d = new Difficulty(level);
         cards = new Cards(d.getTotalCards(), d.getGridRows(), d.getGridCols()); 
-//        fillImages();
         numMatches = d.getTotalCards() / 2;
-        System.out.println(cards);
+        //System.out.println(cards);
     }
+    /**
+     * Build GUI objects and attach them to the scene.
+     */
     public void buildForm() {
         Label lblName = new Label("Name: " + name);
         Label lblLevel = new Label("Difficulty: " + d.getLvlName());
@@ -81,10 +96,6 @@ public class GameForm {
         lblNumMatches = new Label(Integer.toString(numMatches));
         lblNumFound = new Label(Integer.toString(numFound));
         lblNumAttempts = new Label(Integer.toString(numAttempts));
-
-//        lblNumMatches.textProperty().bind(new SimpleIntegerProperty(numMatches).asString());
-//        lblNumFound.textProperty().bind(new SimpleIntegerProperty(numFound).asString());
-//        lblNumAttempts.textProperty().bind(new SimpleIntegerProperty(numAttempts).asString());
 
         HBox matchesHBox = new HBox(5, lblMatches, lblNumMatches);
         HBox foundHBox = new HBox(5, lblFound, lblNumFound);
@@ -106,65 +117,33 @@ public class GameForm {
 		cardsGrid.setPadding(new Insets(20));
 //		cardsGrid.setGridLinesVisible(true);
         cardsGrid.setAlignment(Pos.CENTER);
-//		cardsGrid.maxHeightProperty().bind(cardsGrid.widthProperty().multiply(1.1));
-//		cardsGrid.minHeightProperty().bind(cardsGrid.widthProperty().multiply(1.06));
-//		cardsGrid.maxWidthProperty().bind(cardsGrid.heightProperty().multiply(1.01));
-//        cardsGrid.heightProperty().addListener(new ChangeListener<Number>(){
-//            @Override
-//            public void changed(ObservableValue<? extends Number > observable,
-//                                Number old, Number newNum) {
-//                cardsGrid.setMaxWidth((double)newNum * 1.1);
-//            }
-//        });
-//        cardsGrid.widthProperty().addListener(new ChangeListener<Number>(){
-//            @Override
-//            public void changed(ObservableValue<? extends Number > observable,
-//                                Number old, Number newNum) {
-//                cardsGrid.setMaxHeight((double) newNum * 1.1);
-//            }
-//        });
-        
         VBox root = new VBox (40, headerHBox, cardsGrid);
 //                root.setStyle("-fx-border-style: solid inside;"
 //                        + "-fx-border-color: blue;"
 //                        + "-fx-border-width: 2;");
         root.setAlignment(Pos.TOP_CENTER);
-		//root.setFillHeight(true);
 		root.setVgrow(cardsGrid, Priority.ALWAYS);
-		//cardsGrid.prefHeightProperty().bind(root.heightProperty());
 
         Scene scene = new Scene(root, d.getScreenSizeX(), d.getScreenSizeY());
-//        Scene scene = new Scene(root);
-//        ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) -> {
-//           cardsGrid.setMaxSize(cardsGrid.getHeight() * 1.1, cardsGrid.getWidth() * 1.1);
-//        };
-//        primaryStage.widthProperty().addListener(stageSizeListener);
-//        primaryStage.heightProperty().addListener(stageSizeListener);
-                
-
                                             
         primaryStage.setTitle(name + "'s MemoryGame");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
+    /**
+     * Build grid of cards and attach event listener to each.
+     */
     private void defineGrid() {
         cardsGrid = new GridPane();
         for (int i = 0; i < d.getGridRows(); i++) {
-//            cardsGrid.getRowConstraints().add(new RowConstraints(0, d.getCardHeight(),
-//									Double.MAX_VALUE));
 			RowConstraints row = new RowConstraints();
 			row.setPercentHeight((100 / d.getGridRows()) * 100);
-//			row.setMinHeight(0);
 			cardsGrid.getRowConstraints().add(row);
-
         }
         for (int i = 0; i < d.getGridCols(); i++) {
-//            cardsGrid.getColumnConstraints().add(new ColumnConstraints(d.getCardWidth(),
-//									Control.USE_COMPUTED_SIZE, Control.USE_COMPUTED_SIZE));
 			ColumnConstraints col = new ColumnConstraints();
 			col.setPercentWidth((100 / d.getGridCols()) * 100);
-//			col.setMinWidth(0);
 			cardsGrid.getColumnConstraints().add(col);
         }
         for (int y = 0; y < d.getGridCols(); y++) {
@@ -172,72 +151,76 @@ public class GameForm {
                 ResizableImageView view = new ResizableImageView(cardBack);
                 HBox.setHgrow(view, Priority.ALWAYS);
                 
-//                ImageView view = new ImageView(cardBack);
                 HBox cardBox = new HBox(view);
                 cardBox.setAlignment(Pos.CENTER);
 //                cardBox.setStyle("-fx-border-style: solid inside;"
 //                        + "-fx-border-color: blue;"
 //                        + "-fx-border-width: 2;");
-//                view.fitHeightProperty().bind(cardBox.heightProperty());
-//                view.fitWidthProperty().bind(cardBox.widthProperty());
                 cardsGrid.add(cardBox, y, x);
-
-                
-
-//                cardsGrid.add(new ImageView(cardBack), y, x);
             }
         }
     }
 
+    /**
+     * Logic for grid click.
+     */
     class gridClickHandler implements EventHandler<MouseEvent> {
+        /**
+         * Show front side of card when grid is clicked.
+         * @param event Mouse click event.
+         */
         @Override
         public void handle(MouseEvent event) {
+            // The node clicked
             Node clickedNode = event.getPickResult().getIntersectedNode();
+            // The row index of the node
             int rowIndex;
+            // The column index of the node.
             int colIndex;
+            // If this is the first card and two cards were flipped before this one.
             if (secondCard != null) {
+                // flip over the first two cards
                 firstCard.setImage(cardBack);
                 secondCard.setImage(cardBack);
+                // reset values
                 firstCard = null;
                 secondCard = null;
             }
+            // If the node clicked is and ImageView
             if (clickedNode != cardsGrid && !(clickedNode instanceof HBox)) {
+                // An ImageView object to hold the current node
                 ImageView thisView = (ImageView) clickedNode;
-                System.out.println(thisView.getImage());
                 rowIndex = GridPane.getRowIndex(clickedNode.getParent());
-                System.out.println(rowIndex);
                 colIndex = GridPane.getColumnIndex(clickedNode.getParent());
                 thisView.setImage(cards.getCard(rowIndex, colIndex).getImage());
+                // If this is the first card of the turn
                 if (firstCardView == null) {
                     firstCardRow = rowIndex;
                     firstCardCol = colIndex;
                     firstCardView = thisView;
                     firstCard = thisView;
-                    
                 } 
+                // If the same card is not clicked twice
                 else if (thisView != firstCardView) {
                     secondCard = thisView;
+                    // Check if cards are the same
                     if (cards.getCard(firstCardRow, firstCardCol).equals(
                                     cards.getCard(rowIndex, colIndex))) {
-                        // new variables so they still exist by the time pause is over
+                        // Get the fade sequence for each card
                         SequentialTransition fade = getFadeSequence(firstCard);
                         SequentialTransition fade2 = getFadeSequence(secondCard);
 
+                        // Play the fade sequences
                         fade.play();
                         fade2.play();
 
+                        // Reset the first and second card views
                         firstCard = null;
                         secondCard = null;
+                        // update the counters and their labels
                         lblNumMatches.setText(Integer.toString(--numMatches));
                         lblNumFound.setText(Integer.toString(++numFound));
-                        
-                        //System.out.println("matches: " + numMatches + " " + numFound);
-                        //pause.play();
                     }
-//                        else {
-//                            thisView.setImage(cardBack);
-//                            firstCardView.setImage(cardBack);
-//                        }
                     firstCardView = null;
                     lblNumAttempts.setText(Integer.toString(++numAttempts));
                     if (numMatches <= 0) {
@@ -253,6 +236,11 @@ public class GameForm {
             }
         }
     }
+    /**
+     * Create image fade out sequence.
+     * @param img The image to fade.
+     * @return The fade sequence.
+     */
     private SequentialTransition getFadeSequence(ImageView img) {
         FadeTransition fadeIn = new FadeTransition(new Duration(500), img);
         fadeIn.setFromValue(0.0);

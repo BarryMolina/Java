@@ -6,25 +6,23 @@
 package molina_memorygame;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
- *
- * @author barry
+ * This class includes the main and start methods for the game.
  */
 public class Molina_MemoryGame extends Application {
     
+    /**
+     * Where the GUI creating starts.
+     * @param primaryStage The primary stage.
+     */
     @Override
     public void start(Stage primaryStage) {
 //        PlayersTable players = new PlayersTable();
 //        ScoresTable scores = new ScoresTable();
-        IntroForm intro = new IntroForm(primaryStage);
-        intro.buildForm();
+        IntroForm intro = new IntroForm(primaryStage); // Create a new IntroForm
+        intro.buildForm(); // Build the IntroForm and display it
 //        Scores scoresData = new Scores();
 //        scoresData.resetScores();
 //        ScoresForm scores = new ScoresForm(primaryStage);
@@ -37,6 +35,7 @@ public class Molina_MemoryGame extends Application {
     }
 
     /**
+     * The Main Method.
      * @param args the command line arguments
      */
     public static void main(String[] args) {

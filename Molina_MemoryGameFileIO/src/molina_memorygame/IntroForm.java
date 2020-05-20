@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package molina_memorygame;
 
 import javafx.event.ActionEvent;
@@ -16,12 +11,10 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 /**
- *
- * @author barry
+ * This class creates the Intro Form.
  */
 public class IntroForm {
 
@@ -31,9 +24,16 @@ public class IntroForm {
     RadioButton rbMed;
     RadioButton rbHard;
 
+    /**
+     * Load Primary Stage.
+     * @param primaryStage The Primary Stage.
+     */
     public IntroForm(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
+    /**
+     * Build GUI elements.
+     */
     public void buildForm() {
         Label lblTitle = new Label("Welcome to MemoryGame!");
         Label lblName = new Label("Enter Your Name:");
@@ -71,15 +71,25 @@ public class IntroForm {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    /**
+     * Build GameForm when play button is clicked.
+     */
     class PlayButtonHandler implements EventHandler<ActionEvent> {
+        /**
+         * Gather user input to build GameForm.
+         * @param event 
+         */
         @Override
         public void handle(ActionEvent event) {
             
+            // The difficulty level
             DifficultyLevel level;
+            // The player's name
             String name;
 
             name = txtBxName.getText();
             
+            // Determine which difficulty button was selected
             if (rbHard.isSelected()) {
                 level = DifficultyLevel.HARD;
             }
@@ -90,6 +100,7 @@ public class IntroForm {
                 level = DifficultyLevel.EASY;
             }
 
+            // Create the game form
             GameForm game = new GameForm(primaryStage, name, level);
             game.buildForm();
         }

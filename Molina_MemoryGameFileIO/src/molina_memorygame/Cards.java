@@ -9,12 +9,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *
- * @author barry
+ * This class creates and stores a 2-dimensional array of Card objects.
  */
 public class Cards {
 
+    // The directory the images are stored in.
     private final String DIR = "file:cardImages/";
+    // A list of all the card file names.
     private final String[] deck = {
         "10_of_clubs.png",
         "10_of_diamonds.png",
@@ -69,13 +70,27 @@ public class Cards {
         "queen_of_hearts2.png",
         "queen_of_spades2.png"
     };
+    // The file name of the card backside image.
     private String back = "backside.png";
+    // A 2-dimentional array of cards that will be shown on the screen.
     private Card[][] cardsInPlay;
+    // The list that cards will be randomly selected from to fill cardsInPlay.
     private ArrayList<Card> pairs = new ArrayList<>();
+    // A random object used to select cards randomly.
     public Random rand = new Random();
-
+    // The number of cards in play.
     private int numCards;
 
+    /**
+     * Execute necessary steps to fill cardsInPlay.
+     * Get the total number of cards to put in play, create a suitable 
+     * 2-dimensional array to hold them, fill an ArrayList with all the cards
+     * and their matches, and then randomly select cards from that list to fill 
+     * each element of the array.
+     * @param numCards The total number of cards in the array.
+     * @param numRows How many rows.
+     * @param numCols How many columns.
+     */
     public Cards(int numCards, int numRows, int numCols) {
         this.numCards = numCards;
         cardsInPlay = new Card[numRows][numCols];
@@ -83,6 +98,9 @@ public class Cards {
         fillCardsInPlay();
     }
 
+    /**
+     * Fills an ArrayList with Card pairs.
+     */
     private void fillPairs() {
         Card newCard;
         while (pairs.size() < numCards) {
@@ -93,6 +111,9 @@ public class Cards {
             }
         }
     }
+    /**
+     * Fills the 2-dimensional Card array with cards randomly selected from 'pairs'.
+     */
     private void fillCardsInPlay() {
         for (int i = 0; i < cardsInPlay.length; i++) {
             for (int j = 0; j < cardsInPlay[i].length; j++) {
@@ -101,36 +122,26 @@ public class Cards {
         }
     }
     
+    /**
+     * Returns the path for card back image.
+     * @return The path to the card backside image.
+     */
     public String getBack() {
         return DIR + back;
     }
-    
-//    public String getCardURL(int row, int col) {
-//        return DIR + deck[cardsInPlay[row][col]];
-//    }
-
-//    public boolean cardsAreSame(int row1, int col1, int row2, int col2) {
-//        boolean same = false;
-//        if (cardsInPlay[row1][col1] == cardsInPlay[row2][col2]) {
-//            same = true;
-//        }
-//        return same;
-//    }
-    
-//    public int getUnique() {
-//        return numCards / 2;
-//    }
-//    @Override
-//    public String toString() {
-//        String str = "";
-//        for (int i : pairs) {
-//            str += i + ", ";
-//        }
-//        return str;
-//    }
+    /**
+     * Returns the card stored at a specific row and column.
+     * @param row The row of the card.
+     * @param col The column of the card.
+     * @return The Card object at the specified location.
+     */
     public Card getCard(int row, int col) {
         return cardsInPlay[row][col];
     }
+    /**
+     * Lists every card in cardsInPlay.
+     * @return A string of card file names.
+     */
     @Override
     public String toString() {
         String str = "";

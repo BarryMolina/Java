@@ -26,25 +26,34 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 /**
- *
- * @author barry
+ * This class creates the form to display the high scores.
  */
 public class ScoresForm {
 
+    // The primary stage
     private Stage primaryStage;
+    // The scene
     private Scene scene;
+    // The grid to hold the scores
     private GridPane scoresGrid;
+    // The scores
     private Scores scores;
+    // Constants to hold info for the grid
     private final int GRID_ROWS = 5;
     private final int GRID_COLS = 6;
     private final int EASY_COL = 0;
     private final int MED_COL = 2;
     private final int HARD_COL = 4;
+    // Constants to hold string values for each level.
     private final String CLASS_EASY = "easy";
     private final String CLASS_MED = "medium";
     private final String CLASS_HARD = "hard";
 
 
+    /**
+     * Creates a scores object and fills it, then builds the form and displays it.
+     * @param stage The Primary Stage
+     */
     public ScoresForm(Stage stage) {
 
         primaryStage = stage;
@@ -54,8 +63,12 @@ public class ScoresForm {
         stage.setScene(scene);
         stage.setTitle("High Scores");
         stage.show();
-
     }
+    /**
+     * Creates a scores form but takes a new Score that it first adds to the score file.
+     * @param stage The primary stage
+     * @param newScore The new score to add.
+     */
     public ScoresForm(Stage stage, Score newScore) {
 
         primaryStage = stage;
@@ -66,9 +79,11 @@ public class ScoresForm {
         stage.setScene(scene);
         stage.setTitle("High Scores");
         stage.show();
-
     }
 
+    /**
+     * Builds the high score form.
+     */
     private void buildForm() {
         Label title = new Label("High Scores");
 
@@ -99,6 +114,9 @@ public class ScoresForm {
         scene.getStylesheets().add("molina_memorygame/styles.css");
     }
         
+    /**
+     * Builds the grid the hold score data
+     */
     private void buildGrid() {
         scoresGrid = new GridPane();
         for (int i = 0; i < GRID_ROWS; i++) {
@@ -125,23 +143,16 @@ public class ScoresForm {
         addHeadings(EASY_COL, CLASS_EASY);
         addHeadings(MED_COL, CLASS_MED);
         addHeadings(HARD_COL, CLASS_HARD);
-//        for (int col = 0; col < GRID_COLS; col += 2) {
-//            scoresGrid.add(new HBox(new Label("Name")), col, 1);
-//            scoresGrid.add(new HBox(new Label("Turns")), col + 1, 1);
-//        }
-        
 
         fillGrid(scores.getEasyScores(), EASY_COL);
         fillGrid(scores.getMediumScores(), MED_COL);
         fillGrid(scores.getHardScores(), HARD_COL);
-
-//        for (int row = 2; row < GRID_ROWS; row++) {
-//            for (int col = 0; col < GRID_COLS; col++) {
-//                scoresGrid.add(new HBox(), col, row);
-//
-//            }
-//        }
     }
+    /**
+     * Adds the headings to scoresGrid.
+     * @param colStart The column to start at.
+     * @param className The CSS class to add.
+     */
     public void addHeadings(int colStart, String className) {
         HBox bxName = new HBox(new Label("Name"));
         HBox bxTurns = new HBox(new Label("Turns"));
@@ -151,12 +162,20 @@ public class ScoresForm {
         bxTurns.getStyleClass().add("heading-2");
         scoresGrid.add(bxName, colStart, 1);
         scoresGrid.add(bxTurns, colStart + 1, 1);
-
     }
+    /**
+     * Fills the appropriate columns of scoresGrid with names and scores.
+     * @param scoreArray The scores to fill.
+     * @param colStart The column to start at.
+     */
     public void fillGrid(ArrayList<Score> scoreArray, int colStart) {
+        // The name on the score
         String name;
+        // The number of turns taken.
         String score;
+        // The CSS class to add to this cell.
         String className = "";
+        // Set className depending on the difficulty level of these scores
         if (colStart == EASY_COL) {
             className = CLASS_EASY;
         }
@@ -166,18 +185,6 @@ public class ScoresForm {
         else if (colStart == HARD_COL) {
             className = CLASS_HARD;
         }
-//        for (int scoreIdx = 0, gridRow = 2; 
-//                 scoreIdx < scoreArray.size() && gridRow < GRID_ROWS; 
-//                 scoreIdx++, gridRow++) {
-//            name = scoreArray.get(scoreIdx).getName();
-//            score = Integer.toString(scoreArray.get(scoreIdx).getScore());
-//            System.out.println("Adding " + name + " to grid"
-//                    + " at col: " + colStart + " row: " + gridRow);
-//            scoresGrid.add(new HBox(new Label(name)), colStart, gridRow);
-//            System.out.println("Adding " + score + " to grid"
-//                    + " at col: " + (colStart + 1) + " row: " + gridRow);
-//            scoresGrid.add(new HBox(new Label(score)), colStart + 1, gridRow);
-//        }
         for (int scoreIdx = 0, gridRow = 2; 
                  gridRow < GRID_ROWS; 
                  scoreIdx++, gridRow++) {
@@ -188,11 +195,7 @@ public class ScoresForm {
             if (scoreIdx < scoreArray.size()) {
                 name = scoreArray.get(scoreIdx).getName();
                 score = Integer.toString(scoreArray.get(scoreIdx).getScore());
-//                System.out.println("Adding " + name + " to grid"
-//                        + " at col: " + colStart + " row: " + gridRow);
                 nameCell.getChildren().add(new Label(name));
-//                System.out.println("Adding " + score + " to grid"
-//                        + " at col: " + (colStart + 1) + " row: " + gridRow);
                 scoreCell.getChildren().add(new Label(score));
             }
             scoresGrid.add(nameCell, colStart, gridRow);

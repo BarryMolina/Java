@@ -6,11 +6,21 @@
 package molina_memorygame;
 
 /**
- *
- * @author barry
+ * This enumerator allows for three different difficulty levels: easy, medium and hard.
  */
 public enum DifficultyLevel {
 
-    EASY, MEDIUM, HARD
+    /**
+     * The easiest level.
+     */
+    EASY, 
+    /**
+     * A moderate amount of cards.
+     */
+    MEDIUM, 
+    /**
+     * A lot of cards.
+     */
+    HARD
     
 }
